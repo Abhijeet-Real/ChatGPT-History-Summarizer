@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Pytest cache
+.pytest_cache/
+
+# MyPy cache
+.mypy_cache/
+
+# Caches
+__pypackages__/
+
+# IDE and editor files
+.vscode/
+*.code-workspace
+*.sublime-workspace
+.idea/
+*.iml
+
+# Logs and debug files
+*.log
+logs/
+
+# Python packaging
+*.egg-info/
+dist/
+build/
+
+# Windows-specific files
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.swp
+*.swo
+
+# Environment files
+.env
+*.env
+
+# Ignore all .ssf files and any folders named 'ssf' recursively
+**/*.ssf
+**/ssf/
+
+# Data folder
+OpenAI April 2025/
+Speech_to_Speech/
