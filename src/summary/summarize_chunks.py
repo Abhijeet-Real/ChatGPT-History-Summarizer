@@ -19,6 +19,7 @@ def summarize_with_engine(base_folder, chunk_path, summary_path, llm):
     with open(summary_path, "w", encoding="utf-8") as out:
         out.write(summary)
     log_message(base_folder, f"✅ Done: {os.path.basename(summary_path)}")
+    
 
 
 # ---------- Single-GPU Runner ----------

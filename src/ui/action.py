@@ -8,10 +8,13 @@ import threading
 import os
 
 def summarizer_thread(folder, model_name="mistral"):
-    for done, total in sc.summarize_all_chunks(folder, model_name):
-        st.session_state["progress"] = (done, total)
-    cs.concat_summaries(folder)
-    st.session_state["summary_done"] = True
+    try:
+        for done, total in sc.summarize_all_chunks(folder, model_name):
+            st.session_state["progress"] = (done, total)       
+    except Exception as e:
+        pass
+    finally:
+        cs.concat_summaries(folder)
 
 def render_bottom(folder):
     from metadata.collector import collect_metadata
