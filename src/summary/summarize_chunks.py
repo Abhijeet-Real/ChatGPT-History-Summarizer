@@ -1,12 +1,6 @@
-import os, time
-from LLMEngine.LLMEngine import LLMEngine
-
-def log_message(folder, message):
-    log_path = os.path.join(folder, "summary_log.txt")
-    timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
-    with open(log_path, "a", encoding="utf-8") as f:
-        f.write(f"[{timestamp}] {message}\n")
-
+import os
+from LLMEngine.OllamaLoader import LLMEngine
+from utils.log_message import log_message
 
 # ---------- Summary Function ----------
 def summarize_with_engine(base_folder, chunk_path, summary_path, llm):
@@ -15,8 +9,7 @@ def summarize_with_engine(base_folder, chunk_path, summary_path, llm):
     if not text:
         return
 
-    prompt = f"""Create very comprehensive and detailed, summary of the following text {text}
-    """
+    prompt = f"""Create extremely comprehensive and detailed summary of follwing text {text}"""
 
     if len(prompt) > 125000:
         log_message(base_folder, f"⚠️ Prompt too long ({len(prompt)} chars): {os.path.basename(chunk_path)}")
@@ -49,7 +42,7 @@ def summarize_all_chunks(base_folder, model_name):
 
         summarize_with_engine(base_folder, chunk_path, summary_path, llm)
 
-    log_message(base_folder, "🎯 All summaries completed.")
+    log_message(base_folder, "🎯 All summaries completed.") 
 
 # ---------- Entry ----------
 if __name__ == "__main__":

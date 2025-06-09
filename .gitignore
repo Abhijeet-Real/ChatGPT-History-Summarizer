@@ -54,5 +54,6 @@ Desktop.ini
 
 # Data folder
 OpenAI */
-Speech_to_Speech/
+S2S/
 SIP/
+Test/

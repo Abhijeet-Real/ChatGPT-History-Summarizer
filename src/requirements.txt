@@ -1,1 +1,3 @@
-ctransformers
+streamlit==2.32.3
+streamlit-autorefresh===1.45.1
+requests===1.0.1

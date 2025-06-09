@@ -3,11 +3,7 @@
 import requests
 from typing import Literal
 
-try:
-    from llama_cpp import Llama
-    llama_cpp_available = True
-except ImportError:
-    llama_cpp_available = False
+llama_cpp_available = False
 
 class LLMEngine:
     def __init__(self, model_name="mistral", backend: Literal["ollama", "llama"] = "ollama", model_path=None, gpu_layers=0):

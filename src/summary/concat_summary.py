@@ -1,11 +1,14 @@
-import os
+import os, time
 
-def concat_summaries(folder: str):
-    summary_dir = os.path.join(folder, "summarize_chunk")
-    output_file = os.path.join(folder, "concatenated_summary.ssf")
+from utils.log_message import log_message
+
+
+def concat_summaries(base_folder: str):
+    summary_dir = os.path.join(base_folder, "summarize_chunk")
+    output_file = os.path.join(base_folder, "concatenated_summary.ssf")
 
     if not os.path.exists(summary_dir):
-        print(f"❌ Folder not found: {summary_dir}")
+        print(f"❌ base_folder not found: {summary_dir}")
         return
 
     summary_files = sorted([
@@ -17,7 +20,7 @@ def concat_summaries(folder: str):
         print("⚠️ No summary files found to concatenate.")
         return
 
-    print(f"🔄 Concatenating {len(summary_files)} summaries...")
+    log_message(base_folder, f"🔄 Concatenating {len(summary_files)} summaries...")
 
     with open(output_file, "w", encoding="utf-8") as outfile:
         for filename in summary_files:
@@ -26,9 +29,11 @@ def concat_summaries(folder: str):
                 outfile.write(infile.read().strip())
                 outfile.write("\n\n---\n\n")  # separator between chunks
 
-    print(f"✅ Concatenated summary saved to: {output_file}")
+    log_message(base_folder, f"✅ Concatenated summary saved to: {output_file}")
+
+    return 
 
 
 if __name__ == "__main__":
-    folder_path = "SIP"
-    concat_summaries(folder_path)
+    base_folder_path = "SIP"
+    concat_summaries(base_folder_path)

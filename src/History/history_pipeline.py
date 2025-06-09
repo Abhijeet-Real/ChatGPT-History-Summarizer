@@ -1,14 +1,17 @@
-from History import extract_history as eh
-from History import clean_history as ch
+from history import extract_history as eh
+from history import clean_history as ch
+import os, time
+
+from utils.log_message import log_message
+
+
 
 def history_pipeline(base_folder, convo_json_path):
-    print("🔍 Step 1: Extracting relevant messages...")
+    log_message(base_folder, "🔍 Step 1: Extracting relevant messages...")
     eh.main(base_folder, convo_json_path)
 
-    print("\n🧹 Step 2: Cleaning extracted messages...")
+    log_message(base_folder, "🧹 Step 2: Cleaning extracted messages...")
     ch.clean_project_log(base_folder)
-
-
 
 if __name__ == "__main__":
     folder = r"SIP"  # your base folder

@@ -1,4 +1,5 @@
-import os
+import os, time
+from utils.log_message import log_message
 
 def split_clean_file(base_path, lines_per_chunk=5000, overlap_ratio=0.2):
     """
@@ -22,11 +23,20 @@ def split_clean_file(base_path, lines_per_chunk=5000, overlap_ratio=0.2):
         if not chunk:
             break
         chunk_count += 1
+        
         chunk_filename = os.path.join(output_dir, f"chunk_{chunk_count}.ssf")
+        
+        
+        if os.path.exists(chunk_filename):
+            log_message(base_path, f" Chunk file already exists at: {chunk_filename}. Skipping Chunking.")
+            
+
         with open(chunk_filename, "w", encoding="utf-8") as out_file:
             out_file.write('\n'.join(chunk))
 
-    print(f"✅ Done: Split into {chunk_count} chunks in '{output_dir}'")
+    log_message(base_path, f"✅ Done: Split into {chunk_count} chunks in '{output_dir}'")
+
+    return chunk_count
 
 if __name__ == "__main__":
     base_folder = r"speech_to_speech"  # ✅ Change to your working folder

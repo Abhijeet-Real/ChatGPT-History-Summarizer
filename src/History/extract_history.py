@@ -1,10 +1,11 @@
 import json
 import os
 from collections import defaultdict
+from utils.log_message import log_message
 
-def load_keywords(base_path):
-    """Load search keywords from a file in base_path."""
-    filepath = os.path.join(base_path, "keywords.ssf")
+def load_keywords(base_folder):
+    """Load search keywords from a file in base_folder."""
+    filepath = os.path.join(base_folder, "keywords.ssf")
     with open(filepath, "r", encoding="utf-8") as file:
         return [line.strip().lower() for line in file if line.strip()]
 
@@ -55,6 +56,7 @@ def extract_messages_grouped(convo_json_path, keywords):
     return sorted_convos
 
 def save_grouped_results(grouped, output_path):
+    base_folder = output_path
     """Save grouped relevant messages to 'extracted history.ssf'."""
     full_path = os.path.join(output_path, "extracted history.ssf")
 
@@ -66,13 +68,26 @@ def save_grouped_results(grouped, output_path):
                     f"[{msg['role'].upper()}] ({msg['date']}):\n{msg['content']}\n{'-'*50}\n"
                 )
 
-    print(f"✅ Extracted {len(grouped)} conversations to: {full_path}")
-    return full_path
+    log_message(base_folder, f"✅ Extracted {len(grouped)} conversations to: {full_path}")
+    return len(grouped)
+
 
 def main(base_folder, convo_json_path):
+
+    log_message(base_folder, "🔍 Step 1: Extracting relevant messages...")
+
     keywords = load_keywords(base_folder)
+
+    output_path = base_folder + r"/extracted history.ssf"
+
+    if os.path.exists(output_path):
+        log_message(base_folder, f" History file already exists at: {output_path}. Skipping cleaning.")
+        return
+
     grouped = extract_messages_grouped(convo_json_path, keywords)
-    save_grouped_results(grouped, base_folder)
+    length = save_grouped_results(grouped, base_folder)
+
+    return length
 
 if __name__ == "__main__":
     # Example usage:
