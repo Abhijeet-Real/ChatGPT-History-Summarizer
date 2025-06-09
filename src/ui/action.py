@@ -31,8 +31,7 @@ def render_bottom(folder):
             cleaned_history_length = ch.clean_project_log(folder)
             chunk_count = cc.split_clean_file(folder, lines_per_chunk=1000, overlap_ratio=0.2)
             st.success(f"✅ Prepared dataset with {chunk_count} chunks.")
-
     with col2:
-        if st.button("🚀 Run Summarizer"):
+        if st.button("Run Summarizer"):
             st.session_state["summary_done"] = False
             threading.Thread(target=summarizer_thread, args=(folder, "mistral"), daemon=True).start()
