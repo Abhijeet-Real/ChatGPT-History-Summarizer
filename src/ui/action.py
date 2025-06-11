@@ -29,7 +29,7 @@ def render_bottom(folder):
             data_path = os.path.join(st.session_state["selected_data_folder"], "conversations.json")
             extacted_history_length = eh.main(folder, data_path)
             cleaned_history_length = ch.clean_project_log(folder)
-            chunk_count = cc.split_clean_file(folder, lines_per_chunk=1000, overlap_ratio=0.2)
+            chunk_count = cc.split_clean_file(folder, lines_per_chunk=150, overlap_ratio=0.2)
             st.success(f"✅ Prepared dataset with {chunk_count} chunks.")
     with col2:
         if st.button("Run Summarizer"):
