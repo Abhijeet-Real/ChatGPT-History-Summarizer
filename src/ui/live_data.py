@@ -7,6 +7,7 @@ def render_live_data(folder):
 
     meta = collect_metadata(folder)
 
+    st.subheader("Progress")
     col1, col2 = st.columns(2)
 
     with col1:
@@ -19,6 +20,4 @@ def render_live_data(folder):
         avg_summary_words = int(round(meta['Average Summary Words'] / 50) * 50)
         st.write(f"Average Summary Length: {avg_summary_words} words")
 
-
-    st.subheader("Progress")
     st.progress(meta['Progress %'] / 100)
