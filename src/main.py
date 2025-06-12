@@ -4,6 +4,7 @@ import summary.summarize_chunks as sc
 import summary.concat_summary as cs
 import chunks.create_chunk as cc
 from utils.log_message import log_message 
+import summary.rm_think as rt
 
 if __name__ == "__main__":
     folder = r"Test"
@@ -15,4 +16,5 @@ if __name__ == "__main__":
     cleaned_history_length = ch.clean_project_log(folder)
     chunk_count = cc.split_clean_file(folder, lines_per_chunk=1000, overlap_ratio=0.2)
     sc.summarize_all_chunks(folder, model_name)
+    rt.remove_think_blocks(base_folder)
     cs.concat_summaries(folder)

@@ -1,11 +1,11 @@
 import streamlit as st
 from metadata.collector import collect_metadata
 
-def render_live_data(folder):
+def render_live_data(base_folder):
 
     st.divider()
 
-    meta = collect_metadata(folder)
+    meta = collect_metadata(base_folder)
 
     st.subheader("Progress")
     col1, col2 = st.columns(2)
