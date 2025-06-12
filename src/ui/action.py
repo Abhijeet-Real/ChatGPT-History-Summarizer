@@ -27,7 +27,7 @@ def render_bottom(base_folder):
 
     with col1:
         if st.button("Prepare Chunks"):
-            data_path = os.path.join(st.session_state["selected_data_base_folder"], "conversations.json")
+            data_path = os.path.join(st.session_state["selected_data_folder"], "conversations.json")
             extacted_history_length = eh.main(base_folder, data_path)
             cleaned_history_length = ch.clean_project_log(base_folder)
             chunk_count = cc.split_clean_file(base_folder, lines_per_chunk=250, overlap_ratio=0.2)
@@ -35,4 +35,4 @@ def render_bottom(base_folder):
     with col2:
         if st.button("Run Summarizer"):
             st.session_state["summary_done"] = False
-            threading.Thread(target=summarizer_thread, args=(base_folder, "deepseek-r1:8b"), daemon=True).start()
+            threading.Thread(target=summarizer_thread, args=(base_folder, "gemma3:4b"), daemon=True).start()
