@@ -10,8 +10,7 @@ import summary.rm_think as rt
 
 def summarizer_thread(base_folder, model_name="mistral"):
     try:
-        for done, total in sc.summarize_all_chunks(base_folder, model_name):
-            st.session_state["progress"] = (done, total)       
+        sc.summarize_all_chunks(base_folder, model_name) 
     except Exception as e:
         pass
     finally:
@@ -34,5 +33,4 @@ def render_bottom(base_folder):
             st.success(f"✅ Prepared dataset with {chunk_count} chunks.")
     with col2:
         if st.button("Run Summarizer"):
-            st.session_state["summary_done"] = False
             threading.Thread(target=summarizer_thread, args=(base_folder, "gemma3:4b"), daemon=True).start()

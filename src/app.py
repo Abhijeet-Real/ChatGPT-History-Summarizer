@@ -1,10 +1,10 @@
 # app.py
 import streamlit as st
-from streamlit_autorefresh import st_autorefresh
-from ui.selection import render_selection
-from ui.live_data import render_live_data
 from ui.action import render_bottom
 from ui.edit import render_edit_tools
+from ui.live_data import render_live_data
+from ui.selection import render_selection
+from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(page_title="ChatGPT History Summarizer", layout="wide", page_icon="🖋")
 st.title("Project Summarization Dashboard")

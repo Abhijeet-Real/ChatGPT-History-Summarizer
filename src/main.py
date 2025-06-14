@@ -3,8 +3,9 @@ import history.clean_history as ch
 import summary.summarize_chunks as sc
 import summary.concat_summary as cs
 import chunks.create_chunk as cc
-from utils.log_message import log_message 
 import summary.rm_think as rt
+from utils.log_message import log_message 
+
 
 if __name__ == "__main__":
     folder = r"Test"
