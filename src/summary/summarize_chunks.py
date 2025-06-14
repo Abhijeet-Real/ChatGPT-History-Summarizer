@@ -9,21 +9,23 @@ def summarize_with_engine(base_folder, chunk_path, summary_path, llm):
     if not text:
         return
 
-    prompt = f"""Create extremely comprehensive and detailed summary of follwing text {text}"""
-    
+    prompt = f"""Create extremely comprehensive and detailed summary of following text:\n\n{text}"""
 
     if len(prompt) > 125000:
         log_message(base_folder, f"⚠️ Prompt too long ({len(prompt)} chars): {os.path.basename(chunk_path)}")
+        return
 
     try:
         summary = llm.generate(prompt)
     except Exception as e:
-        log_message(base_folder, f"❌ Failed to generate Summary")
-
-
-    with open(summary_path, "w", encoding="utf-8") as out:
-        out.write(summary)
+        log_message(base_folder, f"❌ Failed to generate Summary for {os.path.basename(chunk_path)}: {e}")
+        return
+    finally:
+        with open(summary_path, "w", encoding="utf-8") as out:
+            out.write(summary)
+    
     log_message(base_folder, f"✅ Done: {os.path.basename(summary_path)}")
+
     
 
 

@@ -12,7 +12,7 @@ def summarizer_thread(base_folder, model_name="mistral"):
     try:
         sc.summarize_all_chunks(base_folder, model_name) 
     except Exception as e:
-        pass
+        print("Exited summarizer_thread with Error:", e)
     finally:
         rt.remove_think_blocks(base_folder)
         cs.concat_summaries(base_folder)
